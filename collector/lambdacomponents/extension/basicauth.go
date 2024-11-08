@@ -1,4 +1,4 @@
-//go:build lambdacomponents.custom && (lambdacomponents.all || lambdacomponents.exporter.all || lambdacomponents.exporter.logging)
+//go:build lambdacomponents.custom && (lambdacomponents.all || lambdacomponents.extension.all || lambdacomponents.extension.basicauth)
 
 // Copyright The OpenTelemetry Authors
 //
@@ -14,15 +14,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package exporter
+package extension
 
 import (
-	"go.opentelemetry.io/collector/exporter"
-	"go.opentelemetry.io/collector/exporter/loggingexporter"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension"
+	"go.opentelemetry.io/collector/extension"
 )
 
 func init() {
-	Factories = append(Factories, func(extensionId string) exporter.Factory {
-		return loggingexporter.NewFactory()
+	Factories = append(Factories, func(extensionId string) extension.Factory {
+		return basicauthextension.NewFactory()
 	})
 }
